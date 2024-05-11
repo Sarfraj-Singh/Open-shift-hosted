@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Stylesheet */
+        body {
+            font-family: 'Comic Sans MS', cursive; /* Fun and playful font */
+            margin: 0;
+            padding: 0;
+            background-color: #97E0AA; /* Light green background */
+            color: #000000; /* Darker green text for better contrast */
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Table Styles */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+
+        tr {
+            transition: all 0.3s ease-in-out;
+        }
+
+            tr:nth-child(even) {
+                background-color: #fafafa;
+            }
+
+            tr:hover {
+                background-color: #eee;
+            }
+
+            .applied,
+            tr.applied > td {
+                background-color: #008712;
+                color: white;
+            }
+
+            tr:not(.applied) > td {
+                background-color: #F03E3E;
+                color: white;
+            }
+
+        .header-main{
+            color: black;
+            font-size: 1rem;
+            padding: 10px;
+            display: flex;
+            align-items: flex-end;
+            background-color: #333333;
+            width: 100vw;
+        }
+
+        a {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .decision-button {
+            cursor: pointer;
+            display: inline-block;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+            transition: background-color 0.2s ease-in-out;
+            background-color: yellow;
+        }
+
+            .decision-button:focus {
+                outline: none;
+                background-color: lightgreen;
+            }
+
+            .decision-button[aria-pressed="true"] {
+                background-color: lightgreen;
+            }
+
+          /* Social Icons - Playful and interactive */
+            .social-icons {
+                display: flex;
+                justify-content: center;
+                margin-top: 2rem; /* Spacing above social icons */
+            }
+
+                .social-icons a {
+                    display: inline-block;
+                    width: 70px;
+                    height: 70px;
+                    line-height: 70px;
+                    text-align: center;
+                    border-radius: 50%; /* Round icons */
+                    background-color: white; /* Dark green background */
+                    color: black; /* Light green icon color */
+                    margin: 0 1rem; /* Spacing between icons */
+                    font-size: 2.5rem; /* Larger icon size */
+                    transition: transform 0.3s ease; /* Smooth hover effect */
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+                }
+
+                    .social-icons a:hover {
+                        transform: scale(1.2); /* Scale up on hover */
+                    }
+    </style>
+</head>
+<body>
+    <header class="header-main">
+        <a href="home.html" style="font-style: italic; font-size: 1.5rem; font-weight: bold;">OpenShift</a>
+        <a href="home.html"> Home</a>
+        <a href="index.html"> Learn</a>
+        <a href="AboutCode.html">About Code</a>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Employment Date</th>
+                <th>Employee Number</th>
+                <th>Status</th>
+                <th>Decision</th>
+                <th>Weekly Hours</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>// Defining an array of employee objects
+        const employees = [
+            { name: "Sarah Jones", date: "2023-07-15", number: "54321", status: "Applied", decision: "Pending", weeklyHours: 44 },
+            { name: "Michael Chen", date: "2022-02-01", number: "98765", status: "Applied ", decision: "Pending", weeklyHours: 30 },
+            { name: "Aaliyah Rodriguez", date: "2024-04-10", number: "123098", status: "Not Applied ", decision: "Pending", weeklyHours: 20 },
+            { name: "David Lee", date: "2021-05-12", number: "36987", status: "Not Applied ", decision: "Pending", weeklyHours: 22 },
+            { name: "Emily Garcia", date: "2020-11-23", number: "74125", status: "Not Applied ", decision: "Pending", weeklyHours: 24 },
+            { name: "William Brown", date: "2023-12-28", number: "85214", status: "Applied", decision: "Pending", weeklyHours: 32 },
+            { name: "Sophia Hernandez", date: "2022-09-09", number: "63782", status: "Not Applied ", decision: "Pending", weeklyHours: 36 },
+            { name: "Sophia Davis", date: "2022-06-30", number: "09876", status: "Applied", decision: "Pending", weeklyHours: 36 },
+            { name: "Logan Wilson", date: "2023-10-12", number: "13579", status: "Not Applied", decision: "Pending", weeklyHours: 28 },
+            { name: "Isabella Martinez", date: "2021-09-08", number: "24680", status: "Applied", decision: "Pending", weeklyHours: 32 },
+            { name: "Mason Anderson", date: "2020-12-01", number: "98765", status: "Not Applied", decision: "Pending", weeklyHours: 24 },
+            { name: "Amelia Taylor", date: "2022-03-28", number: "13579", status: "Applied", decision: "Pending", weeklyHours: 40 },
+            { name: "Elijah White", date: "2023-07-03", number: "02468", status: "Not Applied", decision: "Pending", weeklyHours: 26 },
+            { name: "Ava Garcia", date: "2021-05-18", number: "24680", status: "Applied", decision: "Pending", weeklyHours: 34 },
+            { name: "Benjamin Lopez", date: "2024-11-30", number: "13579", status: "Not Applied", decision: "Pending", weeklyHours: 18 },
+            { name: "Charlotte Perez", date: "2020-09-22", number: "98765", status: "Applied", decision: "Pending", weeklyHours: 29 },
+            { name: "Lucas Turner", date: "2023-04-07", number: "24680", status: "Not Applied", decision: "Pending", weeklyHours: 27 },
+            { name: "Mia Hernandez", date: "2021-02-14", number: "13579", status: "Applied", decision: "Pending", weeklyHours: 33 },
+            { name: "Henry Gonzalez", date: "2022-08-11", number: "98765", status: "Not Applied", decision: "Pending", weeklyHours: 23 },
+            { name: "Harper Carter", date: "2024-01-05", number: "13579", status: "Applied", decision: "Pending", weeklyHours: 35 },
+            { name: "Alexander Scott", date: "2020-06-09", number: "98765", status: "Not Applied", decision: "Pending", weeklyHours: 31 },
+            { name: "Evelyn Flores", date: "2023-05-17", number: "13579", status: "Applied", decision: "Pending", weeklyHours: 37 },
+        ];
+
+        // Get the table body element from the HTML document
+        const tableBody = document.querySelector("tbody");
+
+        // Initialize variables for maximum pending approvals, shift duration, and approved count
+        let maxPending;
+        let shiftDuration;
+        let approvedCount = 0;
+
+        // Function to prompt the user for valid maximum items and shift duration
+        function getValidMaxItemsAndShiftDuration(listSize) {
+            let valid = false;
+            // Continue prompting until valid inputs are provided
+            while (!valid) {
+                // Prompt for maximum number of employees to approve
+                maxPending = parseInt(prompt(`Enter the maximum number of employees to approve (cannot exceed ${listSize}):`));
+                // Validate the input for maximum pending approvals
+                if (isNaN(maxPending) || maxPending <= 0 || maxPending > listSize) {
+                    alert("Invalid input. Please enter a valid number of employees.");
+                } else {
+                    // Prompt for shift duration
+                    shiftDuration = parseInt(prompt("Enter the shift duration for all approved employees (in hours):"));
+                    // Validate the input for shift duration
+                    if (isNaN(shiftDuration) || shiftDuration < 1 || shiftDuration > 24) {
+                        alert("Invalid input. Please enter a valid number of hours for the shift duration.");
+                    } else {
+                        valid = true; // Set valid to true to exit the loop
+                    }
+                }
+            }
+        }
+
+        // Call the function to prompt for maximum items and shift duration
+        getValidMaxItemsAndShiftDuration(employees.length);
+
+        // Filter and sort the employees based on their status
+        const appliedEmployees = employees.filter(e => e.status.trim().toLowerCase() === "applied").sort((a, b) => new Date(a.date) - new Date(b.date));
+        const notAppliedEmployees = employees.filter(e => e.status.trim().toLowerCase() !== "applied").sort((a, b) => new Date(a.date) - new Date(b.date));
+        const sortedEmployees = appliedEmployees.concat(notAppliedEmployees);
+
+        // Function to update row color based on status
+        function updateRowColor(row, status) {
+            row.classList.remove("applied", "not-applied");
+            row.classList.add(status.trim().toLowerCase() === "applied" ? "applied" : "not-applied");
+        }
+
+        // Iterate over each employee and create table rows dynamically
+        sortedEmployees.forEach((employee) => {
+            // Create table row and table data elements for each employee attribute
+            const row = document.createElement("tr");
+            const nameCell = document.createElement("td");
+            const dateCell = document.createElement("td");
+            const numberCell = document.createElement("td");
+            const statusCell = document.createElement("td");
+            const decisionCell = document.createElement("td");
+            const weeklyHoursCell = document.createElement("td");
+
+            // Set text content for each table data cell
+            nameCell.textContent = employee.name;
+            dateCell.textContent = employee.date;
+            numberCell.textContent = employee.number;
+            statusCell.textContent = employee.status;
+
+            // Create decision button element and set its properties
+            const decisionButton = document.createElement("button");
+            decisionButton.classList.add("decision-button");
+            decisionButton.textContent = employee.decision === "Pending" ? "Pending" : "Approved";
+            decisionButton.disabled = employee.status.trim().toLowerCase() !== "applied";
+
+            // Event listener for decision button click
+            decisionButton.addEventListener("click", () => {
+                // Check if maximum pending approvals limit is reached
+                if (approvedCount < maxPending) {
+                    // Check if the employee's decision is pending and weekly hours don't exceed the limit
+                    if (employee.decision === "Pending" && employee.weeklyHours > 43) {
+                        alert("Maximum weekly limit of 44 hours will be exceeded! Shift cannot be assigned.");
+                        return;
+                    } else {
+                        // Update the decision and adjust weekly hours accordingly
+                        if (decisionButton.textContent === "Pending") {
+                            approvedCount++;
+                            decisionButton.textContent = "Approved";
+                            decisionButton.style.backgroundColor = "green";
+                            employee.weeklyHours += shiftDuration;
+                        } else if (decisionButton.textContent === "Approved") {
+                            approvedCount--;
+                            decisionButton.textContent = "Pending";
+                            decisionButton.style.backgroundColor = "yellow";
+                            employee.weeklyHours -= shiftDuration;
+                            // Ensure weekly hours don't become negative
+                            if (employee.weeklyHours < 0) {
+                                alert("Error: Weekly hours cannot be negative. Please review!");
+                                employee.weeklyHours = 0;
+                            }
+                        }
+                    }
+                } else {
+                    alert("Maximum number of required staff achieved!");
+                }
+                // Update the weekly hours display
+                weeklyHoursCell.textContent = employee.weeklyHours;
+            });
+
+            // Set initial text content for weekly hours cell
+            weeklyHoursCell.textContent = employee.weeklyHours;
+
+            // Append decision button to its cell, update row color, and append all cells to the row
+            decisionCell.appendChild(decisionButton);
+            updateRowColor(row, employee.status);
+            row.appendChild(nameCell);
+            row.appendChild(dateCell);
+            row.appendChild(numberCell);
+            row.appendChild(statusCell);
+            row.appendChild(decisionCell);
+            row.appendChild(weeklyHoursCell);
+
+            // Append the row to the table body
+            tableBody.appendChild(row);
+        });</script>
+
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/sarfraj-singh/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Sarfraj-Singh/Open-Shift-Scheduling-Manager" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+</body>
+</html>
